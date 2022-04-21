@@ -1,4 +1,6 @@
 # VoxelMap
+
+**[Updated] Date of release**: We have just received the reviewer comments in the first round of paper reviews and the source code and dataset will be released before **May 31,2022**
 ## Introduction
 **VoxelMap** is an efficient and probabilistic adaptive(coarse-to-fine) voxel mapping method for 3D LiDAR. Unlike the point cloud map, VoxelMap uses planes as representation units. A scan of LiDAR data will generate or update the plane. Each plane contains its own plane parameters and uncertainties that need to be estimated. This repo shows how to integrate VoxelMap into a LiDAR(-Inertial) odometry.
 
@@ -32,6 +34,3 @@ Our accompanying videos are now available on **YouTube**.
     <a href="https://youtu.be/HSwQdXg31WM" target="_blank">
     <img src="pics/video_cover.png" width=60% />
 </div>
-
-## Codes & Datasets
-Our paper is currently under review, and our code will be released after the first round of review if the reviewer's comments are positive.
