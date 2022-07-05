@@ -1,0 +1,44 @@
+common:
+    lid_topic:  "/velodyne_points"
+    imu_topic:  "/imu_data"
+
+preprocess:
+    lidar_type: 2                #1 for Livox serials LiDAR, 2 for Velodyne LiDAR, 3 for L515 LiDAR
+    scan_line: 64
+    blind: 1
+    point_filter_num: 1
+    calib_laser: true              # true for KITTI Odometry dataset
+
+mapping:
+    down_sample_size: 0.5
+    max_iteration: 3
+    voxel_size: 3.0
+    max_layer: 4                # 4 layer, 0, 1, 2, 3
+    layer_point_size: [5, 5, 5, 5, 5]
+    plannar_threshold: 0.01
+    max_points_size: 1000
+    max_cov_points_size: 1000
+
+noise_model:
+    ranging_cov: 0.04
+    angle_cov: 0.1
+    acc_cov_scale: 1.0
+    gyr_cov_scale: 0.5
+
+imu:
+    imu_en: false
+    extrinsic_T: [ 0, 0, 0]
+    extrinsic_R: [ 1, 0, 0, 
+                   0, 1, 0, 
+                   0, 0, 1]
+
+visualization:
+    pub_voxel_map: false
+    publish_max_voxel_layer: 1         # only publish 0,1,2 layer's plane
+    pub_point_cloud: false
+    dense_map_enable: false
+    pub_point_cloud_skip: 5             # publish one points per five points
+
+Result:
+    write_kitti_log: false
+    result_path: "/home/ycj/catkin_github/src/VoxelMap/Log/kitt_log.txt"
