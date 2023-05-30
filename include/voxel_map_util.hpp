@@ -802,11 +802,11 @@ void BuildResidualListOMP(const unordered_map<VOXEL_LOC, OctoTree *> &voxel_map,
   std::mutex mylock;
   ptpl_list.clear();
   std::vector<ptpl> all_ptpl_list(pv_list.size());
-  std::vector<bool> useful_ptpl(pv_list.size());
+  std::vector<int> useful_ptpl(pv_list.size());
   std::vector<size_t> index(pv_list.size());
   for (size_t i = 0; i < index.size(); ++i) {
     index[i] = i;
-    useful_ptpl[i] = false;
+    useful_ptpl[i] = 0;
   }
 #ifdef MP_EN
   omp_set_num_threads(MP_PROC_NUM);
@@ -863,12 +863,12 @@ void BuildResidualListOMP(const unordered_map<VOXEL_LOC, OctoTree *> &voxel_map,
       if (is_sucess) {
 
         mylock.lock();
-        useful_ptpl[i] = true;
+        useful_ptpl[i] = 1;
         all_ptpl_list[i] = single_ptpl;
         mylock.unlock();
       } else {
         mylock.lock();
-        useful_ptpl[i] = false;
+        useful_ptpl[i] = 0;
         mylock.unlock();
       }
     }
