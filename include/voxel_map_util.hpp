@@ -1231,8 +1231,13 @@ void calcBodyCov(Eigen::Vector3d &pb, const float range_inc,
   Eigen::Matrix3d direction_hat;
   direction_hat << 0, -direction(2), direction(1), direction(2), 0,
       -direction(0), -direction(1), direction(0), 0;
-  Eigen::Vector3d base_vector1(1, 1,
-                               -(direction(0) + direction(1)) / direction(2));
+  Eigen::Vector3d base_vector1;
+  if (fabs(direction(2)) > 1e-6) { // A small threshold to avoid division by zero
+    base_vector1 = Eigen::Vector3d(1, 1, -(direction(0) + direction(1)) / direction(2));
+  } else {
+    // If direction(2) is close to zero, choose a different approach to avoid division by zero
+    base_vector1 = Eigen::Vector3d(0, 0, 1);
+  }
   base_vector1.normalize();
   Eigen::Vector3d base_vector2 = base_vector1.cross(direction);
   base_vector2.normalize();
